@@ -1,0 +1,233 @@
+<template id="mwg-007-template">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      appearance: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    :host {
+      display: block;
+      position: relative;
+      background: linear-gradient(90deg, #667eea 100%, #764ba2 100%);
+      color: #f1f1f1;
+      font: 500 normal 22px/1.3 "Inter", sans-serif;
+    }
+
+    .mwg_effect007 {
+      min-height: 100vh;
+    }
+
+    .mwg_effect007 .scroll {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .mwg_effect007 .header {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      top: 25px;
+      left: 0;
+      font: 500 normal 13px/0.9 "IBM Plex Mono";
+      text-transform: uppercase;
+    }
+
+    .mwg_effect007 .pin-height {
+      height: 400vh;
+    }
+
+    .mwg_effect007 .container {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .mwg_effect007 .circle {
+      width: 300%;
+      aspect-ratio: 1;
+      z-index: 20;
+      position: absolute;
+      top: 50%;
+      left: -100%;
+    }
+
+    .mwg_effect007 .title {
+      width: 943px;
+
+      height: auto;
+      object-fit: cover;
+      position: absolute;
+
+      top: 50%;
+      left: 50%;
+    }
+
+    .mwg_effect007 .media {
+      width: 28vw;
+      aspect-ratio: 0.74;
+      border-radius: 0.6vw;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .mwg_effect007 .media-background {
+      position: absolute;
+      top: 0;
+      right: 50%;
+      width: 100%;
+      height: 100%;
+
+      z-index: 1;
+      opacity: 1;
+    }
+
+    .mwg_effect007 .title {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 40vw;
+      height: auto;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      object-fit: contain;
+      pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+      .mwg_effect007 .circle {
+        width: 400%;
+        left: -150%;
+      }
+      .mwg_effect007 .media {
+        width: 55vw;
+      }
+    }
+
+    .mwg_effect007 .debugger {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 15px 20px;
+      border-radius: 8px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 14px;
+      z-index: 1000;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      min-width: 200px;
+    }
+
+    .mwg_effect007 .debugger .label {
+      color: #888;
+      margin-bottom: 5px;
+    }
+
+    .mwg_effect007 .debugger .value {
+      color: #00ff88;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .mwg_effect007 .description {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 380px;
+      padding: 50px;
+      z-index: 30;
+      height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      font-size: 16px;
+    }
+
+    .mwg_effect007 .description {
+      opacity: 0;
+      transform: translateY(0);
+    }
+
+    .mwg_effect007 .description.active {
+      opacity: 1;
+    }
+  </style>
+
+  <section class="mwg_effect007">
+    <div class="debugger">
+      <div class="label">Current Circle Index:</div>
+      <div class="value" id="circle-index">0</div>
+      <div class="label" style="margin-top: 10px">Scroll Progress:</div>
+      <div class="value" id="scroll-progress">0%</div>
+    </div>
+    <div class="pin-height">
+      <div class="description description-1">
+        A Planet Heroes élményséta a Múlt, Jelen, Jövő témaköreire épül - ebben
+        a keretben mutatjuk meg a fenntarthatóság összefüggéseit: honnan
+        indultunk, hova jutottunk mindazzal, amit eddig tettünk, és mi lehet a
+        megoldás a bolygóval közös jövőnkre nézve.
+      </div>
+      <div class="description description-2">
+        A Planet Explorers élményséta a Múlt, Jelen, Jövő témaköreire épül -
+        ebben a keretben mutatjuk meg a fenntarthatóság összefüggéseit: honnan
+        indultunk, hova jutottunk mindazzal, amit eddig tettünk, és mi lehet a
+        megoldás a bolygóval közös jövőnkre nézve.
+      </div>
+      <div class="description description-3">
+        A Planet Ride élményséta a Múlt, Jelen, Jövő témaköreire épül - ebben a
+        keretben mutatjuk meg a fenntarthatóság összefüggéseit: honnan
+        indultunk, hova jutottunk mindazzal, amit eddig tettünk, és mi lehet a
+        megoldás a bolygóval közös jövőnkre nézve.
+      </div>
+      <div class="container">
+        <div class="circle">
+          <img class="title heroes" src="assets/medias/heroes.png" alt="" />
+          <video
+            class="media heroes"
+            src="assets/medias/heroes.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+          ></video>
+        </div>
+        <div class="circle">
+          <img
+            class="title explorers"
+            src="assets/medias/explorers.png"
+            alt=""
+          />
+          <video
+            class="media explorers"
+            src="assets/medias/explorers.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+          ></video>
+        </div>
+        <div class="circle">
+          <img class="title ride" src="assets/medias/ride.png" alt="" />
+          <video
+            class="media ride"
+            src="assets/medias/ride.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+          ></video>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>

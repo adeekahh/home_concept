@@ -1,0 +1,138 @@
+<template id="text-scroll-template">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      appearance: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    :host {
+      display: block;
+      background: #eeebe4;
+      color: #545247;
+    }
+
+    .mwg_effect009 .text {
+      position: absolute;
+      font: 500 normal clamp(14px, 1.15vw, 100px) / 1.2 "Inter", sans-serif;
+      letter-spacing: -0.01em;
+      top: 25px;
+      left: 25px;
+      width: 23%;
+      min-width: 300px;
+    }
+
+    .mwg_effect009 .visual {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      width: 12vw;
+    }
+
+    .mwg_effect009 .pin-height {
+      height: 350vh;
+    }
+
+    .mwg_effect009 .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 20vh;
+      position: relative;
+      top: 40vh;
+    }
+
+    .mwg_effect009 .center {
+      position: relative;
+      width: 100%;
+    }
+
+    .mwg_effect009 .sentence {
+      width: 100%;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      font: 500 normal 8vw/0.9 "Inter", sans-serif;
+    }
+
+    .mwg_effect009 .sentence span {
+      display: inline-block;
+      letter-spacing: -0.06em;
+    }
+
+    .mwg_effect009 .sentence:not(:first-child) {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .mwg_effect009 {
+      position: relative;
+    }
+
+    .plane-image {
+      position: absolute;
+      top: 200px;
+      right: 25px;
+    }
+
+    .bird-image {
+      position: absolute;
+      top: 600px;
+      left: 25px;
+    }
+
+    .plane-image-2 {
+      position: absolute;
+      top: 1000px;
+      left: 25px;
+    }
+
+    .bird-image-2 {
+      position: absolute;
+      top: 1600px;
+      right: 25px;
+    }
+
+    .bird-image-3 {
+      position: absolute;
+      top: 2200px;
+      left: 25px;
+    }
+
+    .plane-image-3 {
+      position: absolute;
+      top: 2600px;
+      right: 25px;
+    }
+  </style>
+
+  <section class="mwg_effect009">
+    <div class="pin-height">
+      <div class="container">
+        <div class="center">
+          <!--  <div class="sentence">Látogass el</div>
+          <div class="sentence">a Planet Budapestre</div> -->
+          <div class="sentence">Lépj be a jövőbe</div>
+          <div class="sentence">ahol a fenntarthatóság</div>
+          <div class="sentence">élménnyé válik</div>
+          <!--  <div class="sentence">Tapasztald meg</div>
+          <div class="sentence">hogyan válik</div>
+          <div class="sentence">a fenntarthatóság</div>
+          <div class="sentence">kézzelfogható élménnyé</div> -->
+        </div>
+      </div>
+    </div>
+    <img class="plane-image" src="assets/medias/plane.png" alt="" />
+    <img class="bird-image" src="assets/medias/bird.png" alt="" />
+    <img class="bird-image-2" src="assets/medias/bird.png" alt="" />
+    <img class="plane-image-2" src="assets/medias/plane.png" alt="" />
+    <img class="bird-image-3" src="assets/medias/bird.png" alt="" />
+    <img class="plane-image-3" src="assets/medias/plane.png" alt="" />
+  </section>
+</template>

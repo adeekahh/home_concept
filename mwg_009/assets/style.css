@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
+/* NORMALIZE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+/* NORMALIZE */
+
+body {
+    background: #121212;
+    color: #F1F1F1;
+}
+.mwg_effect009 .text { 
+    position: absolute;
+    font: 500 normal clamp(14px, 1.15vw, 100px) / 1.2 'Inter', sans-serif;
+    letter-spacing: -0.01em;
+    top: 25px;
+    left: 25px;
+    width: 23%;
+    min-width: 300px;
+}
+.mwg_effect009 .visual {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 12vw;
+}
+.mwg_effect009 .pin-height {
+    height: 600vh;
+}
+.mwg_effect009 .container {
+    display: flex;
+    align-items: center;
+    height: 100vh
+}
+.mwg_effect009 .center {
+    position: relative;
+    width: 100%;
+}
+.mwg_effect009 .sentence {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    font: 500 normal 10vw/0.9 'Inter', sans-serif;
+}
+.mwg_effect009 .sentence span {
+    display: inline-block;
+    letter-spacing: -0.06em;
+}
+.mwg_effect009 .sentence:not(:first-child) {
+    position: absolute;
+    left: 0;
+    top: 0;
+}

@@ -1,0 +1,342 @@
+<template id="parallax-columns-template">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      appearance: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    :host {
+      display: block;
+      position: relative;
+      /* background: #121212; */
+      color: #f1f1f1;
+      font: 500 normal 22px/1.3 "Inter", sans-serif;
+      /* overflow: hidden; */
+    }
+
+    .parallax-columns {
+      display: flex;
+      gap: 1.6vw;
+      padding: 0 1.6vw;
+      width: 100%;
+    }
+
+    .parallax-columns .col {
+      flex: 1;
+    }
+
+    .parallax-columns .container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6vw;
+      padding-bottom: 1.6vw;
+    }
+
+    .parallax-columns .media {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .parallax-columns .media:hover {
+      transform: scale(1.02);
+    }
+
+    @media (max-width: 768px) {
+      .parallax-columns {
+        height: 100vh;
+        display: flex;
+        gap: 15px;
+        padding: 0 15px;
+      }
+      .parallax-columns .container {
+        gap: 15px;
+        padding-bottom: 15px;
+      }
+    }
+  </style>
+
+  <section class="parallax-columns">
+    <div class="col">
+      <div class="container container1">
+        <img
+          class="media"
+          width="706"
+          height="854"
+          src="mwg_034/assets/medias/01.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="707"
+          height="854"
+          src="mwg_034/assets/medias/02.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="1126"
+          height="719"
+          src="mwg_034/assets/medias/03.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="728"
+          height="852"
+          src="mwg_034/assets/medias/04.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="716"
+          height="616"
+          src="mwg_034/assets/medias/05.png"
+          alt=""
+        />
+
+        <img
+          class="media"
+          width="706"
+          height="854"
+          src="mwg_034/assets/medias/01.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="707"
+          height="854"
+          src="mwg_034/assets/medias/02.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="1126"
+          height="719"
+          src="mwg_034/assets/medias/03.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="728"
+          height="852"
+          src="mwg_034/assets/medias/04.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="716"
+          height="616"
+          src="mwg_034/assets/medias/05.png"
+          alt=""
+        />
+      </div>
+    </div>
+    <div class="col">
+      <div class="container container2">
+        <img
+          class="media"
+          width="820"
+          height="592"
+          src="mwg_034/assets/medias/06.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="706"
+          height="854"
+          src="mwg_034/assets/medias/07.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="716"
+          height="800"
+          src="mwg_034/assets/medias/08.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="1126"
+          height="719"
+          src="mwg_034/assets/medias/09.png"
+          alt=""
+        />
+
+        <img
+          class="media"
+          width="820"
+          height="592"
+          src="mwg_034/assets/medias/06.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="706"
+          height="854"
+          src="mwg_034/assets/medias/07.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="716"
+          height="800"
+          src="mwg_034/assets/medias/08.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="1126"
+          height="719"
+          src="mwg_034/assets/medias/09.png"
+          alt=""
+        />
+      </div>
+    </div>
+    <div class="col">
+      <div class="container container3">
+        <img
+          class="media"
+          width="748"
+          height="594"
+          src="mwg_034/assets/medias/10.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="620"
+          height="804"
+          src="mwg_034/assets/medias/11.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="716"
+          height="716"
+          src="mwg_034/assets/medias/12.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="638"
+          height="854"
+          src="mwg_034/assets/medias/13.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="644"
+          height="854"
+          src="mwg_034/assets/medias/14.png"
+          alt=""
+        />
+
+        <img
+          class="media"
+          width="748"
+          height="594"
+          src="mwg_034/assets/medias/10.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="620"
+          height="804"
+          src="mwg_034/assets/medias/11.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="716"
+          height="716"
+          src="mwg_034/assets/medias/12.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="638"
+          height="854"
+          src="mwg_034/assets/medias/13.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="644"
+          height="854"
+          src="mwg_034/assets/medias/14.png"
+          alt=""
+        />
+      </div>
+    </div>
+    <div class="col">
+      <div class="container container4">
+        <img
+          class="media"
+          width="638"
+          height="854"
+          src="mwg_034/assets/medias/15.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="984"
+          height="717"
+          src="mwg_034/assets/medias/16.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="1126"
+          height="720"
+          src="mwg_034/assets/medias/17.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="730"
+          height="852"
+          src="mwg_034/assets/medias/18.png"
+          alt=""
+        />
+
+        <img
+          class="media"
+          width="638"
+          height="854"
+          src="mwg_034/assets/medias/15.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="984"
+          height="717"
+          src="mwg_034/assets/medias/16.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="1126"
+          height="720"
+          src="mwg_034/assets/medias/17.png"
+          alt=""
+        />
+        <img
+          class="media"
+          width="730"
+          height="852"
+          src="mwg_034/assets/medias/18.png"
+          alt=""
+        />
+      </div>
+    </div>
+  </section>
+</template>
