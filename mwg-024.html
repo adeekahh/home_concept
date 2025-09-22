@@ -1,0 +1,118 @@
+<template id="mwg-024-template">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
+
+    /* NORMALIZE */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      appearance: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    :host {
+      display: block;
+      background: #1e1d14;
+      color: #eeebe4;
+    }
+
+    .mwg_effect024 .pin-height {
+      height: 200vh;
+    }
+    .mwg_effect024 .container {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .mwg_effect024 .sentences {
+      position: relative;
+      font: 500 normal 10vw/1.2 "Inter", sans-serif;
+      letter-spacing: -0.06em;
+    }
+    .mwg_effect024 .sentence {
+      overflow: hidden;
+    }
+    .mwg_effect024 .sentence p {
+      display: flex;
+      white-space: nowrap;
+      width: max-content;
+      will-change: transform;
+    }
+    .mwg_effect024 .sentence2 {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .mwg_effect024 .sentence2 p {
+      transform: translate(0, 100%);
+    }
+    .mwg_effect024 .glyph {
+      width: 4vw;
+      height: auto;
+    }
+    .mwg_effect024 .texts {
+      display: flex;
+      justify-content: space-between;
+      margin: 1vw 0 0;
+      padding: 4vw 4vw 0;
+      border-top: 1px dashed rgb(72, 72, 72);
+      font: 500 normal 0.9vw / normal "Inter";
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 768px) {
+      .mwg_effect024 .sentences {
+        font-size: 70px;
+      }
+      .mwg_effect024 .texts {
+        font-size: 8px;
+        padding: 15px;
+        margin: 15px 0 0;
+      }
+    }
+  </style>
+
+  <section class="mwg_effect024">
+    <div class="pin-height">
+      <div class="container">
+        <div class="sentences">
+          <div class="sentence sentence1">
+            <p>
+              <span>&nbsp;Foglald le a helyed&nbsp;</span>
+              <img class="glyph" src="assets/medias/planet-jegy.png" alt="" />
+              <span>&nbsp;Foglald le a helyed&nbsp;</span>
+              <img class="glyph" src="assets/medias/planet-jegy.png" alt="" />
+              <span>&nbsp;Foglald le a helyed&nbsp;</span>
+              <img class="glyph" src="assets/medias/planet-jegy.png" alt="" />
+              <span>&nbsp;Foglald le a helyed&nbsp;</span>
+              <img class="glyph" src="assets/medias/planet-jegy.png" alt="" />
+            </p>
+          </div>
+          <div class="sentence sentence2">
+            <p>
+              <span>&nbsp;Foglald le a helyed&nbsp;</span>
+              <img class="glyph" src="assets/medias/planet-jegy.png" alt="" />
+              <span>&nbsp;Foglald le a helyed&nbsp;</span>
+              <img class="glyph" src="assets/medias/planet-jegy.png" alt="" />
+              <span>&nbsp;Foglald le a helyed&nbsp;</span>
+              <img class="glyph" src="assets/medias/planet-jegy.png" alt="" />
+              <span>&nbsp;Foglald le a helyed&nbsp;</span>
+              <img class="glyph" src="assets/medias/planet-jegy.png" alt="" />
+            </p>
+          </div>
+        </div>
+        <div class="texts">
+          <p>Ezek majd</p>
+          <p>Mindenféle linkek</p>
+          <p>Lesznek itt</p>
+          <p>A footerben</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>

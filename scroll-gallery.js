@@ -274,9 +274,10 @@ class MWG007Component extends HTMLElement {
               root.style.background = `linear-gradient(90deg, #40403E ${position}%, #67735B ${position}%)`;
             } else {
               newCircleIndex = 2;
-              // Phase 3 (66-100%): Red gradient sweep
+              // Phase 3 (66-100%): Red gradient sweep - but never reach 100%
               const phaseProgress = (progress - 0.66) / 0.34; // Normalize to 0-1
-              const position = 100 - phaseProgress * 100; // Go from 100% to 0%
+              const maxSweep = 0; // Maximum sweep percentage to keep last color visible
+              const position = 100 - phaseProgress * maxSweep; // Go from 100% to 15%
               root.style.background = `linear-gradient(90deg, #67735B ${position}%, #EEEBE4 ${position}%)`;
             }
 

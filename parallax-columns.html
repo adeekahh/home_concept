@@ -43,12 +43,18 @@
       display: block;
       width: 100%;
       height: auto;
+      aspect-ratio: 3/4;
+      object-fit: cover;
       border-radius: 8px;
-      transition: transform 0.3s ease;
+      transition: border-radius 0.3s ease-in-out;
+    }
+
+    .parallax-columns .media.square {
+      aspect-ratio: 4/3;
     }
 
     .parallax-columns .media:hover {
-      transform: scale(1.02);
+      border-radius: 200px;
     }
 
     @media (max-width: 768px) {
@@ -68,75 +74,20 @@
   <section class="parallax-columns">
     <div class="col">
       <div class="container container1">
-        <img
-          class="media"
-          width="706"
-          height="854"
-          src="mwg_034/assets/medias/01.png"
-          alt=""
-        />
-        <img
-          class="media"
-          width="707"
-          height="854"
-          src="mwg_034/assets/medias/02.png"
-          alt=""
-        />
+        <img class="media" src="assets/medias/planet-1.jpg" alt="" />
+        <img class="media square" src="assets/medias/planet-2.jpg" alt="" />
         <img
           class="media"
           width="1126"
           height="719"
-          src="mwg_034/assets/medias/03.png"
+          src="assets/medias/planet-3.jpg"
           alt=""
         />
         <img
           class="media"
           width="728"
           height="852"
-          src="mwg_034/assets/medias/04.png"
-          alt=""
-        />
-        <img
-          class="media"
-          width="716"
-          height="616"
-          src="mwg_034/assets/medias/05.png"
-          alt=""
-        />
-
-        <img
-          class="media"
-          width="706"
-          height="854"
-          src="mwg_034/assets/medias/01.png"
-          alt=""
-        />
-        <img
-          class="media"
-          width="707"
-          height="854"
-          src="mwg_034/assets/medias/02.png"
-          alt=""
-        />
-        <img
-          class="media"
-          width="1126"
-          height="719"
-          src="mwg_034/assets/medias/03.png"
-          alt=""
-        />
-        <img
-          class="media"
-          width="728"
-          height="852"
-          src="mwg_034/assets/medias/04.png"
-          alt=""
-        />
-        <img
-          class="media"
-          width="716"
-          height="616"
-          src="mwg_034/assets/medias/05.png"
+          src="assets/medias/planet-4.jpg"
           alt=""
         />
       </div>
@@ -147,57 +98,22 @@
           class="media"
           width="820"
           height="592"
-          src="mwg_034/assets/medias/06.png"
+          src="assets/medias/planet-6.jpg"
           alt=""
         />
-        <img
-          class="media"
-          width="706"
-          height="854"
-          src="mwg_034/assets/medias/07.png"
-          alt=""
-        />
+        <img class="media square" src="assets/medias/planet-7.jpg" alt="" />
         <img
           class="media"
           width="716"
           height="800"
-          src="mwg_034/assets/medias/08.png"
+          src="assets/medias/planet-8.jpg"
           alt=""
         />
         <img
           class="media"
           width="1126"
           height="719"
-          src="mwg_034/assets/medias/09.png"
-          alt=""
-        />
-
-        <img
-          class="media"
-          width="820"
-          height="592"
-          src="mwg_034/assets/medias/06.png"
-          alt=""
-        />
-        <img
-          class="media"
-          width="706"
-          height="854"
-          src="mwg_034/assets/medias/07.png"
-          alt=""
-        />
-        <img
-          class="media"
-          width="716"
-          height="800"
-          src="mwg_034/assets/medias/08.png"
-          alt=""
-        />
-        <img
-          class="media"
-          width="1126"
-          height="719"
-          src="mwg_034/assets/medias/09.png"
+          src="assets/medias/planet-9.jpg"
           alt=""
         />
       </div>
@@ -208,71 +124,28 @@
           class="media"
           width="748"
           height="594"
-          src="mwg_034/assets/medias/10.png"
+          src="assets/medias/planet-10.jpg"
           alt=""
         />
         <img
           class="media"
           width="620"
           height="804"
-          src="mwg_034/assets/medias/11.png"
+          src="assets/medias/planet-11.jpg"
           alt=""
         />
         <img
-          class="media"
+          class="media square"
           width="716"
           height="716"
-          src="mwg_034/assets/medias/12.png"
+          src="assets/medias/planet-12.jpg"
           alt=""
         />
         <img
           class="media"
           width="638"
           height="854"
-          src="mwg_034/assets/medias/13.png"
-          alt=""
-        />
-        <img
-          class="media"
-          width="644"
-          height="854"
-          src="mwg_034/assets/medias/14.png"
-          alt=""
-        />
-
-        <img
-          class="media"
-          width="748"
-          height="594"
-          src="mwg_034/assets/medias/10.png"
-          alt=""
-        />
-        <img
-          class="media"
-          width="620"
-          height="804"
-          src="mwg_034/assets/medias/11.png"
-          alt=""
-        />
-        <img
-          class="media"
-          width="716"
-          height="716"
-          src="mwg_034/assets/medias/12.png"
-          alt=""
-        />
-        <img
-          class="media"
-          width="638"
-          height="854"
-          src="mwg_034/assets/medias/13.png"
-          alt=""
-        />
-        <img
-          class="media"
-          width="644"
-          height="854"
-          src="mwg_034/assets/medias/14.png"
+          src="assets/medias/planet-13.jpg"
           alt=""
         />
       </div>
@@ -283,57 +156,28 @@
           class="media"
           width="638"
           height="854"
-          src="mwg_034/assets/medias/15.png"
+          src="assets/medias/planet-15.jpg"
           alt=""
         />
         <img
-          class="media"
+          class="media square"
           width="984"
           height="717"
-          src="mwg_034/assets/medias/16.png"
+          src="assets/medias/planet-16.jpg"
           alt=""
         />
         <img
           class="media"
           width="1126"
           height="720"
-          src="mwg_034/assets/medias/17.png"
+          src="assets/medias/planet-17.jpg"
           alt=""
         />
         <img
-          class="media"
+          class="media square"
           width="730"
           height="852"
-          src="mwg_034/assets/medias/18.png"
-          alt=""
-        />
-
-        <img
-          class="media"
-          width="638"
-          height="854"
-          src="mwg_034/assets/medias/15.png"
-          alt=""
-        />
-        <img
-          class="media"
-          width="984"
-          height="717"
-          src="mwg_034/assets/medias/16.png"
-          alt=""
-        />
-        <img
-          class="media"
-          width="1126"
-          height="720"
-          src="mwg_034/assets/medias/17.png"
-          alt=""
-        />
-        <img
-          class="media"
-          width="730"
-          height="852"
-          src="mwg_034/assets/medias/18.png"
+          src="assets/medias/planet-18.jpg"
           alt=""
         />
       </div>
