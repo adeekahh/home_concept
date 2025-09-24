@@ -131,8 +131,54 @@
     <!-- Scroll Gallery Web Component -->
     <mwg-007></mwg-007>
 
+    <!-- EXPO -->
+    <div class="expo-container h-[400vh] bg-[#eeebe4]">
+      <div class="expo-pin-container h-screen flex items-center justify-center">
+        <div class="expo-content aspect-[16/9] rounded-full w-[12.5%] bg-red-500 flex items-center justify-center relative overflow-hidden">
+          <div class="expo-bg expo-bg-1 absolute inset-0 bg-cover bg-center" style="background-image: url('assets/medias/expo-01.png'); opacity: 1;"></div>
+          <div class="expo-bg expo-bg-2 absolute inset-0 bg-cover bg-center" style="background-image: url('assets/medias/expo-02.png'); opacity: 0;"></div>
+          <div class="expo-bg expo-bg-3 absolute inset-0 bg-cover bg-center" style="background-image: url('assets/medias/expo-03.png'); opacity: 0;"></div>
+          <div class="expo-bg expo-bg-4 absolute inset-0 bg-cover bg-center" style="background-image: url('assets/medias/expo-04.png'); opacity: 0;"></div>
+          <div class="expo-bg expo-bg-5 absolute inset-0 bg-cover bg-center" style="background-image: url('assets/medias/expo-05.png'); opacity: 0;"></div>
+          <div class="expo-text text-center text-white opacity-0 font-medium text-[40px] tracking-[-0.02em] leading-[100%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 whitespace-nowrap">100 stand</div>
+          <div class="expo-text text-center text-white opacity-0 font-medium text-[64px] tracking-[-0.02em] leading-[100%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 whitespace-nowrap">12 ágazat</div>
+          <div class="expo-text text-center text-white opacity-0 font-medium text-[96px] tracking-[-0.02em] leading-[100%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 whitespace-nowrap">5 napon át</div>
+          <div class="expo-text text-center text-white opacity-0 font-medium text-[40px] tracking-[-0.02em] leading-[100%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 whitespace-nowrap"><div class="flex flex-col gap-4 items-center justify-center">
+            <img
+              class="w-full"
+              src="assets/medias/planet-expo.png"
+              alt="planet-expo"
+            />
+            <p class="w-[320px] text-wrap max-w-[400px] text-center text-[18px] leading-[100%]">
+              Fenntarthatósági és zöld innovációs vásár, a teljes Planet koncepció forrása.
+            </p>
+            <a
+              href="#"
+              class="scale-75 right-col flex items-center uppercase text-[13px] font-medium tracking-[0.1em] gap-[2px] group"
+              ><img
+                class="scale-0 group-hover:translate-x-[43px] group-hover:scale-100 transition-all duration-300"
+                src="assets/medias/arrow-right-white.svg"
+                alt="arrow"
+              />
+              <span
+                class="group-hover:translate-x-[43px] h-[43px] flex items-center justify-center transition-all duration-300 border border-[white] rounded-full px-4 py-2"
+                >Többet az expóról</span
+              >
+              <img
+                class="group-hover:scale-0 group-hover:translate-x-[43px] transition-all duration-300"
+                src="assets/medias/arrow-right-white.svg"
+                alt="arrow"
+              />
+            </a>
+          </div></div>
+
+        </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Planet Expo -->
-    <div class="h-screen flex flex-col gap-4 items-center justify-center">
+    <!--  <div class="h-screen flex flex-col gap-4 items-center justify-center">
       <img
         class="w-[50%]"
         src="assets/medias/planet-expo.png"
@@ -156,7 +202,7 @@
           alt="arrow"
         />
       </a>
-    </div>
+    </div> -->
     <!-- Parallax Columns Web Component -->
     <parallax-columns></parallax-columns>
 
@@ -241,6 +287,126 @@
                     }
                   });
                 },
+              },
+            });
+
+            // Pin the expo content for 300vh
+            ScrollTrigger.create({
+              trigger: ".expo-container",
+              start: "top top",
+              end: "bottom 125%",
+              pin: ".expo-pin-container",
+              pinSpacing: false,
+            });
+
+            // Scale expo content while pinned
+            gsap.to(".expo-content", {
+              width: "100%",
+              height: "100%",
+              borderRadius: "0px",
+              ease: "power2.inOut",
+              scrollTrigger: {
+                trigger: ".expo-container",
+                start: "top top",
+                end: "bottom 125%",
+                scrub: 1,
+              },
+            });
+
+            // Preload all expo images
+            const expoImages = [
+              "assets/medias/expo-01.png",
+              "assets/medias/expo-02.png", 
+              "assets/medias/expo-03.png",
+              "assets/medias/expo-04.png",
+              "assets/medias/expo-05.png"
+            ];
+
+            // Preload images to prevent flashing
+            expoImages.forEach(src => {
+              const img = new Image();
+              img.src = src;
+            });
+
+            // Cycle through background images 5 times using opacity
+            gsap.timeline({
+              scrollTrigger: {
+                trigger: ".expo-container",
+                start: "top top",
+                end: "bottom 125%",
+                scrub: 1,
+                onUpdate: (self) => {
+                  const progress = self.progress;
+                  
+                  let currentImageIndex;
+                  
+                  // Ensure last image (expo-05) shows at 90% progress and stays
+                  if (progress >= 0.9) {
+                    currentImageIndex = 4; // expo-05 (index 4)
+                  } else {
+                    // 4.5 cycles through first 4 images until 90% progress
+                    const adjustedProgress = progress / 0.9; // Scale progress to 0-1 for the first 90%
+                    const totalCycles = 4.5;
+                    const totalImages = 4 * totalCycles; // Only cycle through first 4 images
+                    currentImageIndex = Math.floor(adjustedProgress * totalImages) % 4;
+                  }
+                  
+                  // Hide all backgrounds
+                  document.querySelectorAll('.expo-bg').forEach(bg => {
+                    gsap.set(bg, { opacity: 0 });
+                  });
+                  
+                  // Show current background
+                  const currentBg = document.querySelector(`.expo-bg-${currentImageIndex + 1}`);
+                  if (currentBg) {
+                    gsap.set(currentBg, { opacity: 1 });
+                  }
+                  
+                  // Hide all text first
+                  document.querySelectorAll('.expo-text').forEach(text => {
+                    gsap.set(text, { opacity: 0 });
+                  });
+                  
+                  // Show text based on progress
+                  const totalCycles = 5;
+                  const currentCycle = Math.floor(progress * totalCycles);
+                  
+                  // Cycle 0: no text, Cycle 1: text 1, Cycle 2: text 2, etc.
+                  if (currentCycle > 0 && currentCycle <= 4) {
+                    const currentText = document.querySelector(`.expo-text:nth-child(${currentCycle + 5})`); // +5 because text divs come after bg divs
+                    if (currentText) {
+                      gsap.set(currentText, { opacity: 1 });
+                    }
+                  }
+                },
+                onLeave: () => {
+                  // Keep Text 4 visible when leaving the section
+                  document.querySelectorAll('.expo-text').forEach(text => {
+                    gsap.set(text, { opacity: 0 });
+                  });
+                  const lastText = document.querySelector('.expo-text:nth-child(9)'); // Text 4 is the 9th child
+                  if (lastText) {
+                    gsap.set(lastText, { opacity: 1 });
+                  }
+                },
+                onEnterBack: () => {
+                  // Resume normal cycling when scrolling back into section
+                  // This will be handled by the onUpdate function
+                }
+              }
+            });
+
+            // Scale background images from 150% to 100%
+            gsap.fromTo(".expo-bg", {
+              scale: 1.5
+            }, {
+              scale: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: ".expo-container",
+                start: "top top",
+                end: "bottom 125%",
+                scrub: 1,
               },
             });
 
