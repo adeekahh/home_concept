@@ -7,4 +7,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Prevent horizontal scroll */
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
 /* NORMALIZE */

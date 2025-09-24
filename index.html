@@ -6,6 +6,10 @@
     <title>Home Concept with MWG 007</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- GSAP and SplitText -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/SplitText.min.js"></script>
     <link rel="stylesheet" href="style.css" />
 
     <style>
@@ -28,9 +32,15 @@
         flex-shrink: 0;
         padding: 0 12px;
       }
+
+      .split-word {
+        display: inline-block;
+        opacity: 0.2;
+        transition: opacity 0.3s ease;
+      }
     </style>
   </head>
-  <body>
+  <body class="bg-[#eeebe4]">
     <div
       class="header fixed h-[40px] top-5 w-[calc(100%-96px)] pl-[0px] pr-4 py-3 bg-white bg-opacity-10 backdrop-blur-lg left-1/2 -translate-x-1/2 z-50 border border-[#545247] rounded-full flex items-center justify-between uppercase text-[13px] font-medium tracking-[0.1em]"
     >
@@ -50,12 +60,8 @@
         <a href="#">HU</a>
       </div>
     </div>
-    <!--  <div
-      class="loader fixed inset-0 flex items-center justify-center bg-red-500"
-    ></div> -->
-
-    <div class="hero bg-[#eeebe4] text-[#545247] relative overflow-hidden">
-      <div class="sticky top-0 z-10">
+    <div class="hero bg-[#eeebe4] text-[#545247] relative">
+      <div class="hero-header bg-[#eeebe4] z-10">
         <div class="logo-container px-12 pt-[148px]">
           <img src="assets/medias/planet-logo.svg" alt="logo" />
         </div>
@@ -101,7 +107,22 @@
         </div>
       </div>
       <div class="main-visual z-20 relative">
-        <img src="assets/medias/main-visual.png" alt="main-visual" />
+        <img src="assets/medias/updated-map.png" alt="main-visual" />
+      </div>
+    </div>
+
+    <div class="description-container h-[150vh] bg-[#eeebe4]">
+      <div
+        class="description-pin-container h-screen flex items-center justify-center"
+      >
+        <p
+          class="description-text w-[66%] max-w-[800px] text-center text-[#545247] text-[40px] tracking-[-0.02em] leading-[100%] font-medium"
+        >
+          Lépj be a Planet Budapestre és tapasztald meg, hogyan válik a
+          fenntarthatóság kézzelfogható élménnyé. Inspiráló kiállítások és
+          folyamatos workshopok kapcsolják össze a kíváncsiságot a tettekkel
+          három fókuszterületen.
+        </p>
       </div>
     </div>
 
@@ -148,7 +169,7 @@
     <script src="parallax-columns.js" type="module"></script>
     <script src="mwg-024.js" type="module"></script>
 
-    <!-- Main visual scaling animation -->
+    <!-- Main visual scaling animation and sticky header -->
     <script>
       // Wait for GSAP to be loaded by the components
       window.addEventListener("load", () => {
@@ -157,15 +178,81 @@
           if (window.gsap && window.ScrollTrigger) {
             gsap.registerPlugin(ScrollTrigger);
 
+            // Pin the hero header while the hero section scrolls through
+            ScrollTrigger.create({
+              trigger: ".hero",
+              start: "top top",
+              end: "bottom 125%",
+              pin: ".hero-header",
+              pinSpacing: false,
+              onToggle: (self) => {
+                // Optional: Add/remove classes when pinning starts/stops
+                const headerEl = document.querySelector(".hero-header");
+                if (headerEl) {
+                  if (self.isActive) {
+                    headerEl.classList.add("is-pinned");
+                  } else {
+                    headerEl.classList.remove("is-pinned");
+                  }
+                }
+              },
+            });
+
+            // Pin the description text for 200vh
+            ScrollTrigger.create({
+              trigger: ".description-container",
+              start: "top top",
+              end: "bottom 75%",
+              pin: ".description-pin-container",
+              pinSpacing: false,
+            });
+
+            // Split text into words and animate
+            function splitTextIntoWords(element) {
+              const text = element.textContent.trim();
+              const words = text.split(/\s+/).filter((word) => word.length > 0);
+              element.innerHTML = words
+                .map((word) => `<span class="split-word">${word}</span>`)
+                .join(" ");
+              return element.querySelectorAll(".split-word");
+            }
+
+            // Apply text splitting to description text
+            const descriptionText = document.querySelector(".description-text");
+            const words = splitTextIntoWords(descriptionText);
+
+            // Animate words opacity based on scroll
+            gsap.timeline({
+              scrollTrigger: {
+                trigger: ".description-container",
+                start: "top top",
+                end: "bottom 75%",
+                scrub: 1,
+                onUpdate: (self) => {
+                  const progress = self.progress;
+                  const totalWords = words.length;
+                  const wordsToShow = Math.floor(progress * totalWords);
+
+                  words.forEach((word, index) => {
+                    if (index <= wordsToShow) {
+                      gsap.to(word, { opacity: 1, duration: 0 });
+                    } else {
+                      gsap.to(word, { opacity: 0.2, duration: 0 });
+                    }
+                  });
+                },
+              },
+            });
+
+            // Main visual scaling animation
             gsap.fromTo(
               ".main-visual img",
               {
-                scale: 1,
-                y: 0,
+                scale: 1.15,
               },
               {
-                scale: 1.25,
-                y: "-15%",
+                scale: 1.75,
+                y: "-25%",
                 ease: "none",
                 scrollTrigger: {
                   trigger: ".main-visual",
