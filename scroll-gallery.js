@@ -85,6 +85,7 @@ class MWG007Component extends HTMLElement {
     const debuggerElement = root.querySelector(".debugger");
     const circleIndexElement = root.querySelector("#circle-index");
     const scrollProgressElement = root.querySelector("#scroll-progress");
+    const backgroundImages = root.querySelectorAll(".background-image");
 
     // Track current circle index
     let currentCircleIndex = 0;
@@ -96,6 +97,46 @@ class MWG007Component extends HTMLElement {
       }
       if (scrollProgressElement) {
         scrollProgressElement.textContent = `${Math.round(progress * 100)}%`;
+      }
+    };
+
+    // Function to update background images with sequential fade transition
+    const updateBackgroundImage = (index) => {
+      const currentActive = root.querySelector(".background-image.active");
+      const newActive = backgroundImages[index];
+
+      // If same image, do nothing
+      if (currentActive === newActive) return;
+
+      // Animation timeline for sequential fade
+      const tl = gsap.timeline();
+
+      // First, fade in the new background image
+      if (newActive) {
+        gsap.set(newActive, { opacity: 0 });
+        newActive.classList.add("active");
+
+        tl.to(newActive, {
+          opacity: 1,
+          duration: 0.3,
+          ease: "power2.inOut",
+        });
+      }
+
+      // Then, fade out the current active image
+      if (currentActive) {
+        tl.to(
+          currentActive,
+          {
+            opacity: 0,
+            duration: 0.3,
+            ease: "power2.inOut",
+            onComplete: () => {
+              currentActive.classList.remove("active");
+            },
+          },
+          "-=0.1"
+        ); // Start slightly before the fade-in completes for smoother transition
       }
     };
 
@@ -154,8 +195,14 @@ class MWG007Component extends HTMLElement {
       }
     };
 
-    // Initialize active class on the first description
+    // Initialize active class on the first description and background image
     updateDescriptionActive(currentCircleIndex);
+
+    // Set initial background image without animation
+    if (backgroundImages[currentCircleIndex]) {
+      gsap.set(backgroundImages[currentCircleIndex], { opacity: 1 });
+      backgroundImages[currentCircleIndex].classList.add("active");
+    }
 
     // Hide scroll text animation
     gsap.to(scrollText, {
@@ -241,59 +288,37 @@ class MWG007Component extends HTMLElement {
       }
     );
 
-    // Animate gradient based on pin scroll progress with 3 phases
-    gsap.fromTo(
-      root,
-      {
-        background: "linear-gradient(90deg, #8F846E 100%, #764ba2 100%)",
+    // Animate background images based on pin scroll progress
+    ScrollTrigger.create({
+      trigger: pinHeight,
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: (self) => {
+        const progress = self.progress;
+
+        // Determine current circle index based on progress
+        let newCircleIndex;
+        if (progress <= 0.33) {
+          newCircleIndex = 0;
+        } else if (progress <= 0.66) {
+          newCircleIndex = 1;
+        } else {
+          newCircleIndex = 2;
+        }
+
+        // Update circle index if changed
+        if (newCircleIndex !== currentCircleIndex) {
+          currentCircleIndex = newCircleIndex;
+          // Update background image with fade transition
+          updateBackgroundImage(currentCircleIndex);
+          // Update active class when circle index changes
+          updateDescriptionActive(currentCircleIndex);
+        }
+
+        // Update debugger display
+        updateDebugger(currentCircleIndex, progress);
       },
-      {
-        background: "linear-gradient(90deg, #8F846E 100%, #764ba2 100%)",
-        ease: "none",
-        scrollTrigger: {
-          trigger: pinHeight,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: true,
-          onUpdate: (self) => {
-            const progress = self.progress;
-
-            // Determine current circle index based on progress
-            let newCircleIndex;
-            if (progress <= 0.33) {
-              newCircleIndex = 0;
-              // Phase 1 (0-33%): Blue to Purple gradient sweep
-              const phaseProgress = progress / 0.33; // Normalize to 0-1
-              const position = 100 - phaseProgress * 100; // Go from 100% to 0%
-              root.style.background = `linear-gradient(90deg, #8F846E ${position}%, #40403E ${position}%)`;
-            } else if (progress <= 0.66) {
-              newCircleIndex = 1;
-              // Phase 2 (33-66%): Purple to Red gradient sweep
-              const phaseProgress = (progress - 0.33) / 0.33; // Normalize to 0-1
-              const position = 100 - phaseProgress * 100; // Go from 100% to 0%
-              root.style.background = `linear-gradient(90deg, #40403E ${position}%, #67735B ${position}%)`;
-            } else {
-              newCircleIndex = 2;
-              // Phase 3 (66-100%): Red gradient sweep - but never reach 100%
-              const phaseProgress = (progress - 0.66) / 0.34; // Normalize to 0-1
-              const maxSweep = 0; // Maximum sweep percentage to keep last color visible
-              const position = 100 - phaseProgress * maxSweep; // Go from 100% to 15%
-              root.style.background = `linear-gradient(90deg, #67735B ${position}%, #EEEBE4 ${position}%)`;
-            }
-
-            // Update circle index if changed
-            if (newCircleIndex !== currentCircleIndex) {
-              currentCircleIndex = newCircleIndex;
-              // Update active class when circle index changes
-              updateDescriptionActive(currentCircleIndex);
-            }
-
-            // Update debugger display
-            updateDebugger(currentCircleIndex, progress);
-          },
-        },
-      }
-    );
+    });
 
     // Animate color backgrounds for each media
     circles.forEach((circle, index) => {

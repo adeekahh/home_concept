@@ -1,0 +1,235 @@
+<template id="stacked-cards-template">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
+
+    /* NORMALIZE */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      appearance: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    /* NORMALIZE */
+
+    :host {
+      display: block;
+      position: relative;
+      width: 100%;
+    }
+
+    body {
+      background: #121212;
+      color: #f1f1f1;
+    }
+
+    .stacked_cards .pin-height {
+      height: 500vh;
+    }
+
+    .stacked_cards .container {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #121212;
+    }
+
+    .stacked_cards .text {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      padding: 0 25px;
+      display: flex;
+      justify-content: space-between;
+      font: 500 normal 1.6vw / normal "Inter", sans-serif;
+      letter-spacing: -0.03em;
+      transform: translate(0, -50%);
+      color: #f1f1f1;
+    }
+
+    .stacked_cards .medias {
+      width: 22%;
+      aspect-ratio: 0.75;
+      perspective: 25vw;
+    }
+
+    .stacked_cards .media {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 1vw;
+    }
+
+    @media (max-width: 768px) {
+      .stacked_cards .text {
+        display: none;
+      }
+      .stacked_cards .medias {
+        width: 50%;
+        perspective: 50vw;
+      }
+    }
+
+    .lens-logo {
+      position: absolute;
+      bottom: 50px;
+      left: 50px;
+      width: auto;
+      height: auto;
+      scale: 0.75;
+      transform-origin: bottom left;
+    }
+
+    .stacked_cards .text p {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .text-container {
+      position: absolute;
+      bottom: 50px;
+      right: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 20px;
+      z-index: 10;
+    }
+
+    .text-container p {
+      width: 350px;
+      max-width: 400px;
+      font-size: 18px;
+      line-height: 110%;
+      flex-wrap: wrap;
+      color: #f1f1f1;
+      text-align: left;
+    }
+
+    .text-container a {
+      transform: translateX(-36px) scale(0.75);
+      transform-origin: left center;
+      display: flex;
+      align-items: center;
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      gap: 2px;
+      text-decoration: none;
+      color: #f1f1f1;
+      align-self: flex-start;
+    }
+
+    .text-container a img:first-child {
+      transform: scale(0);
+      transition: all 0.3s ease;
+    }
+
+    .text-container a:hover img:first-child {
+      transform: translateX(43px) scale(1);
+    }
+
+    .text-container a span {
+      height: 43px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      border: 1px solid white;
+      border-radius: 9999px;
+      padding: 8px 16px;
+    }
+
+    .text-container a:hover span {
+      transform: translateX(43px);
+    }
+
+    .text-container a img:last-child {
+      transition: all 0.3s ease;
+    }
+
+    .text-container a:hover img:last-child {
+      transform: translateX(43px) scale(0);
+    }
+
+    .custom-button .arrow-left {
+      transform: scale(0);
+      transition: all 0.3s ease;
+    }
+
+    .custom-button:hover .arrow-left {
+      transform: translateX(43px) scale(1);
+    }
+
+    .custom-button .button-text {
+      height: 43px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      border: 1px solid #545247;
+      border-radius: 9999px;
+      padding: 8px 16px;
+    }
+
+    .custom-button:hover .button-text {
+      transform: translateX(43px);
+    }
+
+    .custom-button .arrow-right {
+      transition: all 0.3s ease;
+    }
+
+    .custom-button:hover .arrow-right {
+      transform: translateX(43px) scale(0);
+    }
+  </style>
+
+  <section class="stacked_cards">
+    <div class="pin-height">
+      <div class="container">
+        <img src="assets/medias/lens-logo.png" alt="" class="lens-logo" />
+        <div class="text-container">
+          <p>
+            A fenntarthatósági célok megvalósításában élen járó vállalatok,
+            startupok, egyetemek és előadók bemutatkozási tere.
+          </p>
+          <a href="#" class="custom-button">
+            <img
+              class="arrow-left"
+              src="assets/medias/arrow-icon-dark.svg"
+              alt="arrow"
+            />
+            <span class="button-text">Tudj meg többet</span>
+            <img
+              class="arrow-right"
+              src="assets/medias/arrow-icon-dark.svg"
+              alt="arrow"
+            />
+          </a>
+        </div>
+        <div class="text">
+          <p>Dive into our fantastic world</p>
+          <p>3D landscapes by Mo Eid</p>
+        </div>
+
+        <div class="medias">
+          <img src="assets/medias/lens-01.png" alt="" class="media" />
+          <img src="assets/medias/lens-02.png" alt="" class="media" />
+          <img src="assets/medias/lens-03.png" alt="" class="media" />
+          <img src="assets/medias/lens-04.png" alt="" class="media" />
+          <img src="assets/medias/lens-05.png" alt="" class="media" />
+          <img src="assets/medias/lens-06.png" alt="" class="media" />
+        </div>
+      </div>
+    </div>
+  </section>
+</template>

@@ -41,6 +41,24 @@
     </style>
   </head>
   <body class="bg-[#eeebe4]">
+    <div class="pointer-events-none loader fixed inset-0 z-[9999] flex justify-center items-center bg-[#1E1D14] text-[#EEEBE4] text-[48px] tracking-[-0.02em] leading-[100%] font-medium  overflow-hidden">
+      <div class="loader-content flex gap-4 px-[76px] relative">
+        <img src="assets/medias/left-arch.svg" alt="arch-left" class="absolute top-1/2 left-0  -translate-y-1/2">
+        <img src="assets/medias/right-arch.svg" alt="arch-right" class="absolute top-1/2 right-0 -translate-y-1/2">
+        <div>Életről szóló</div>
+        <div class="rotating-word-container h-[48px] overflow-hidden">
+        <ul class="rotating-word w-[147px] flex flex-col gap-2">
+          <li class="w-fit">élmény</li>
+          <li class="w-fit">utazás</li>
+          <li class="w-fit">felfedezés</li>
+          <li class="w-fit">küldetés</li>
+          <li class="w-fit">üzlet</li>
+        </ul>
+      </div>
+      </div>
+     
+    </div>
+
     <div
       class="header fixed h-[40px] top-5 w-[calc(100%-96px)] pl-[0px] pr-4 py-3 bg-white bg-opacity-10 backdrop-blur-lg left-1/2 -translate-x-1/2 z-50 border border-[#545247] rounded-full flex items-center justify-between uppercase text-[13px] font-medium tracking-[0.1em]"
     >
@@ -106,22 +124,19 @@
           </a>
         </div>
       </div>
-      <div class="main-visual z-20 relative">
+      <div class="main-visual z-20 relative pointer-events-none">
         <img src="assets/medias/updated-map.png" alt="main-visual" />
       </div>
     </div>
 
-    <div class="description-container h-[150vh] bg-[#eeebe4]">
+    <div class="description-container h-[250vh] bg-[#eeebe4] ">
       <div
         class="description-pin-container h-screen flex items-center justify-center"
       >
         <p
           class="description-text w-[66%] max-w-[800px] text-center text-[#545247] text-[40px] tracking-[-0.02em] leading-[100%] font-medium"
         >
-          Lépj be a Planet Budapestre és tapasztald meg, hogyan válik a
-          fenntarthatóság kézzelfogható élménnyé. Inspiráló kiállítások és
-          folyamatos workshopok kapcsolják össze a kíváncsiságot a tettekkel
-          három fókuszterületen.
+        A Planet Budapest egy egyedülálló fenntarthatósági rendezvény, amely a jövőformálásról, a tudás és az élmény összekapcsolásáról, valamint a közösségi cselekvés ösztönzéséről szól
         </p>
       </div>
     </div>
@@ -174,6 +189,9 @@
       </div>
     </div>
 
+    <!-- Stacked Cards Component -->
+    <stacked-cards></stacked-cards>
+
     <!-- Planet Expo -->
     <!--  <div class="h-screen flex flex-col gap-4 items-center justify-center">
       <img
@@ -224,6 +242,89 @@
           if (window.gsap && window.ScrollTrigger) {
             gsap.registerPlugin(ScrollTrigger);
 
+            // Rotating words animation
+            const rotatingWord = document.querySelector('.rotating-word');
+            const wordItems = document.querySelectorAll('.rotating-word li');
+            
+            if (rotatingWord && wordItems.length > 0) {
+              // Measure each word's width
+              const wordWidths = [];
+              wordItems.forEach((item, index) => {
+                // Temporarily show the item to measure its width
+                gsap.set(item, { opacity: 1, display: 'block' });
+                wordWidths[index] = item.getBoundingClientRect().width;
+                gsap.set(item, { opacity: 1, display: 'block' }); // Keep them visible
+              });
+              
+              // Set initial width to first word
+              gsap.set(rotatingWord, { width: wordWidths[0] });
+              
+              // Create infinite timeline for rotating words
+              gsap.timeline()
+                .to(rotatingWord, {
+                  y: 0,
+                  width: wordWidths[0],
+                  duration: 0,
+                })
+                .to(rotatingWord, {
+                  y: -56,
+                  width: wordWidths[1],
+                  duration: 0.5,
+                  ease: "power2.inOut",
+                  delay: 0.5
+                })
+                .to(rotatingWord, {
+                  y: -112,
+                  width: wordWidths[2],
+                  duration: 0.5,
+                  ease: "power2.inOut",
+                  delay: 0.5
+                })
+                .to(rotatingWord, {
+                  y: -168,
+                  width: wordWidths[3],
+                  duration: 0.5,
+                  ease: "power2.inOut", 
+                  delay: 0.5
+                })
+                .to(rotatingWord, {
+                  y: -224,
+                  width: wordWidths[4],
+                  duration: 0.5,
+                  ease: "power2.inOut",
+                  delay: 0.5
+                })
+              }
+
+              gsap.to(".loader-content", {
+                y:-128,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.inOut",
+                delay: 4.25,
+              })
+
+              gsap.to('.loader', {
+                duration: 0.5,
+                delay:4.5,
+                height: 0,
+                ease: "power2.inOut",
+                onComplete: () => {
+                  gsap.set('.loader', { display: 'none' });
+                }
+              });
+
+
+            //Hero animate in animation
+            gsap.set(".main-visual", { opacity: 0, y: "15%" });
+            gsap.to(".main-visual", {
+              opacity: 1,
+              y:0,
+              duration:0.75,
+              ease: "power2.inOut",
+              delay: 4.5,
+            })
+
             // Pin the hero header while the hero section scrolls through
             ScrollTrigger.create({
               trigger: ".hero",
@@ -248,7 +349,7 @@
             ScrollTrigger.create({
               trigger: ".description-container",
               start: "top top",
-              end: "bottom 75%",
+              end: "bottom 100%",
               pin: ".description-pin-container",
               pinSpacing: false,
             });
@@ -272,7 +373,7 @@
               scrollTrigger: {
                 trigger: ".description-container",
                 start: "top top",
-                end: "bottom 75%",
+                end: "bottom 120%",
                 scrub: 1,
                 onUpdate: (self) => {
                   const progress = self.progress;
@@ -294,7 +395,7 @@
             ScrollTrigger.create({
               trigger: ".expo-container",
               start: "top top",
-              end: "bottom 125%",
+              end: "bottom 0%",
               pin: ".expo-pin-container",
               pinSpacing: false,
             });
@@ -432,5 +533,8 @@
         }, 100);
       });
     </script>
+
+    <!-- Stacked Cards Component Script -->
+    <script src="stacked-cards.js"></script>
   </body>
 </html>

@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
+/* NORMALIZE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+/* NORMALIZE */
+
+body {
+    background: #121212;
+    color: #F1F1F1;
+}
+.mwg_effect042 .pin-height {
+    height: 500vh;
+}
+.mwg_effect042 .container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mwg_effect042 .text {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    padding: 0 25px;
+    display: flex;
+    justify-content: space-between;
+    font: 500 normal 1.6vw / normal 'Inter', sans-serif;
+    letter-spacing: -0.03em;
+    transform: translate(0, -50%);
+}
+.mwg_effect042 .medias {
+    width: 22%;
+    aspect-ratio: 0.75;
+    perspective: 25vw;
+} 
+.mwg_effect042 .media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1vw;
+}
+
+@media (max-width: 768px) {
+    .mwg_effect042 .text {
+        display: none;
+    }
+    .mwg_effect042 .medias {
+        width: 50%;
+        perspective: 50vw;
+    }
+}
