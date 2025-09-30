@@ -84,7 +84,7 @@
           <img src="assets/medias/planet-logo.svg" alt="logo" />
         </div>
         <div class="flex w-full items-start justify-between px-12">
-          <div class="left-col flex flex-col items-start justify-start">
+          <div class="left-col flex flex-col items-center justify-start w-full">
             <img src="assets/medias/dateandtime.png" alt="dateanttime" class="origin-top-left scale-75 h-[44px]" />
            <!--  <div
               class="marquee origin-top-left flex flex-nowrap w-[182px] rounded-full text-[#EEEBE4] bg-[#83926B] whitespace-nowrap h-[43px] uppercase text-[13px] font-medium tracking-[0.1em] items-center scale-75 overflow-hidden"
@@ -100,11 +100,15 @@
                 <span>Ingyenes belépés</span>
               </div>
             </div> -->
-            <p class="description max-w-[400px] text-[18px]">
+            <p class="!hidden description max-w-[400px] text-[18px]">
               Inspiráló kiállítások és folyamatos workshopok kapcsolják össze a
               kíváncsiságot a tettekkel három fókuszterületen.
             </p>
           </div>
+          <div class="w-full flex items-center justify-center uppercase text-[13px] font-medium tracking-[0.1em] text-[#545247]">
+            Fenntarthatóság - Kaland - Kiállítás
+          </div>
+          <div class="w-full flex items-center justify-end">
           <a
             href="#"
             class="scale-75 right-col flex items-center uppercase text-[13px] font-medium tracking-[0.1em] gap-[2px] group"
@@ -124,9 +128,10 @@
             />
           </a>
         </div>
+        </div>
       </div>
       <div class="main-visual z-20 relative pointer-events-none">
-        <img src="assets/medias/updated-map.png" alt="main-visual" />
+        <img src="assets/medias/terkep.png" alt="main-visual" />
       </div>
     </div>
 
@@ -317,9 +322,9 @@
 
 
             //Hero animate in animation
-            gsap.set(".main-visual", { y: "30%", scale: 1.15 });
+            gsap.set(".main-visual", { y: "60%", scale: 1.5 });
             gsap.to(".main-visual", {
-              y:0,
+              y:"20%",
               scale: 1,
               duration:1.5,
               ease: "power4.out",
