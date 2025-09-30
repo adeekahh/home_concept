@@ -87,8 +87,69 @@ class MWG007Component extends HTMLElement {
     const scrollProgressElement = root.querySelector("#scroll-progress");
     const backgroundImages = root.querySelectorAll(".background-image");
 
-    // Track current circle index
-    let currentCircleIndex = 0;
+    // Track current circle index (-1 means no circle is active yet)
+    let currentCircleIndex = -1;
+
+    // Track floating image animations for each circle
+    const floatingAnimations = new Map();
+
+    // Function to animate floating images when circle becomes active
+    const animateFloatingImages = (circleIndex) => {
+      const circle = circles[circleIndex];
+      if (!circle) return;
+
+      const floatingImages = circle.querySelectorAll(".floating");
+      if (floatingImages.length === 0) return;
+
+      // Kill any existing animation for this circle
+      if (floatingAnimations.has(circleIndex)) {
+        floatingAnimations.get(circleIndex).kill();
+      }
+
+      // Create new timeline with elastic animation and stagger
+      const tl = gsap.timeline();
+
+      // Animate from scale 0 to 0.75 with elastic ease and stagger
+      tl.fromTo(
+        floatingImages,
+        { scale: 0 },
+        {
+          scale: 0.75,
+          duration: 0.8,
+          ease: "elastic.out(1, 0.5)",
+          stagger: 0.1,
+        }
+      );
+
+      // Store the timeline for potential cleanup
+      floatingAnimations.set(circleIndex, tl);
+    };
+
+    // Function to hide floating images when circle becomes inactive
+    const hideFloatingImages = (circleIndex) => {
+      const circle = circles[circleIndex];
+      if (!circle) return;
+
+      const floatingImages = circle.querySelectorAll(".floating");
+      if (floatingImages.length === 0) return;
+
+      // Kill any existing animation for this circle
+      if (floatingAnimations.has(circleIndex)) {
+        floatingAnimations.get(circleIndex).kill();
+      }
+
+      // Animate to scale 0
+      const tl = gsap.timeline();
+      tl.to(floatingImages, {
+        scale: 0,
+        duration: 0.3,
+        ease: "power2.inOut",
+        stagger: 0.05,
+      });
+
+      // Store the timeline for potential cleanup
+      floatingAnimations.set(circleIndex, tl);
+    };
 
     // Function to update debugger display
     const updateDebugger = (index, progress) => {
@@ -195,14 +256,16 @@ class MWG007Component extends HTMLElement {
       }
     };
 
-    // Initialize active class on the first description and background image
-    updateDescriptionActive(currentCircleIndex);
+    // Initialize all floating images to scale 0
+    circles.forEach((circle) => {
+      const floatingImages = circle.querySelectorAll(".floating");
+      if (floatingImages.length > 0) {
+        gsap.set(floatingImages, { scale: 0 });
+      }
+    });
 
-    // Set initial background image without animation
-    if (backgroundImages[currentCircleIndex]) {
-      gsap.set(backgroundImages[currentCircleIndex], { opacity: 1 });
-      backgroundImages[currentCircleIndex].classList.add("active");
-    }
+    // Don't initialize any active states since currentCircleIndex starts at -1
+    // The first circle will be activated when scroll progress reaches the threshold
 
     // Hide scroll text animation
     gsap.to(scrollText, {
@@ -297,8 +360,11 @@ class MWG007Component extends HTMLElement {
         const progress = self.progress;
 
         // Determine current circle index based on progress
+        // Keep activeIndex at -1 until first circle is almost fully on screen
         let newCircleIndex;
-        if (progress <= 0.33) {
+        if (progress <= 0.025) {
+          newCircleIndex = -1; // No circle active yet
+        } else if (progress <= 0.33) {
           newCircleIndex = 0;
         } else if (progress <= 0.66) {
           newCircleIndex = 1;
@@ -308,11 +374,26 @@ class MWG007Component extends HTMLElement {
 
         // Update circle index if changed
         if (newCircleIndex !== currentCircleIndex) {
+          const previousCircleIndex = currentCircleIndex;
           currentCircleIndex = newCircleIndex;
-          // Update background image with fade transition
-          updateBackgroundImage(currentCircleIndex);
-          // Update active class when circle index changes
-          updateDescriptionActive(currentCircleIndex);
+
+          // Hide floating images from previous circle (if it was a valid index)
+          if (
+            previousCircleIndex >= 0 &&
+            previousCircleIndex !== newCircleIndex
+          ) {
+            hideFloatingImages(previousCircleIndex);
+          }
+
+          // Only update UI elements if we have a valid circle index
+          if (currentCircleIndex >= 0) {
+            // Update background image with fade transition
+            updateBackgroundImage(currentCircleIndex);
+            // Update active class when circle index changes
+            updateDescriptionActive(currentCircleIndex);
+            // Animate floating images for new active circle
+            animateFloatingImages(currentCircleIndex);
+          }
         }
 
         // Update debugger display
