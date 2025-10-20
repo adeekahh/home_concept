@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ride</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- GSAP and SplitText -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/SplitText.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      @keyframes marquee {
+        0% {
+          transform: translateX(0%);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      .marquee-content {
+        display: flex;
+        animation: marquee 24s linear infinite;
+        width: max-content;
+      }
+
+      .marquee-content span {
+        flex-shrink: 0;
+        padding: 0 12px;
+      }
+
+      .split-word {
+        display: inline-block;
+        opacity: 0.2;
+        transition: opacity 0.3s ease;
+      }
+    </style>
+  </head>
+  <body class="bg-[#100808]">
+    <!-- Header component -->
+    <div
+      class="header fixed h-[40px] top-5 w-[calc(100%-96px)] pl-[0px] pr-4 py-3 bg-white bg-opacity-10 backdrop-blur-lg left-1/2 -translate-x-1/2 z-50 border border-[#545247] rounded-full flex items-center justify-between uppercase text-[13px] font-medium tracking-[0.1em]"
+    >
+      <div class="left-col w-full flex gap-2 items-center justify-start">
+        <button class="burger scale-75">
+          <img src="assets/medias/burger.svg" alt="burger" />
+        </button>
+        <a href="">Programok</a>
+        <a href="">Helyszín</a>
+        <a href="">Hírek</a>
+      </div>
+      <div class="middle-col w-full flex items-center justify-center">
+        <img src="assets/medias/planet-logo.svg" alt="logo" class="h-[20px]" />
+      </div>
+      <div class="right-col w-full flex gap-2 items-center justify-end">
+        <a href="#">Keresés</a>
+        <a href="#">HU</a>
+      </div>
+    </div>
+
+    <!-- Hero component -->
+    <div class="hero h-screen w-full flex items-center justify-center relative">
+      <img
+        src="assets/medias/ride-szlogennel.png"
+        alt="ride-logo"
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40%] z-20"
+      />
+      <img
+        id="hero-01"
+        src="assets/medias/ride-hero-01.png"
+        alt="ride-hero-01"
+        class="absolute top-[-200px] left-1/2 -translate-x-[52.5%]"
+      />
+      <img
+        id="hero-02"
+        src="assets/medias/ride-hero-02.png"
+        alt="ride-hero-02"
+        class="absolute top-[200px] -left-[12.5%]"
+      />
+      <img
+        id="hero-03"
+        src="assets/medias/ride-hero-03.png"
+        alt="ride-hero-03"
+        class="absolute -top-[10%] -right-[15%] scale-[0.85] z-30"
+      />
+    </div>
+
+    <!-- Text Scroll Ride Web Component -->
+    <text-scroll-ride></text-scroll-ride>
+
+    <!-- Gallery component -->
+    <div
+      class="gallery h-screen w-full text-white flex items-center justify-center"
+    >
+      This is the gallery
+    </div>
+
+    <!-- Description component -->
+    <div class="description-container h-[250vh]">
+      <div
+        class="description-pin-container h-screen flex items-center justify-center"
+      >
+        <p
+          class="description-text w-[66%] max-w-[800px] text-center text-[#ffffff] text-[40px] tracking-[-0.02em] leading-[100%] font-medium"
+        >
+          Tarts velünk az élménysétán, ahol filmes díszletek között elevenedik
+          meg a Föld és ember története. Úgy, ahogyan még sosem mesélték el
+          neked.
+        </p>
+      </div>
+    </div>
+
+    <!-- Bento component -->
+    <div
+      class="bento h-screen w-full bg-green-500 flex items-center justify-center"
+    >
+      This is the bento
+    </div>
+
+    <!-- FAQ component -->
+
+    <!-- Footer component -->
+
+    <script>
+      // Wait for GSAP to be loaded by the components
+      window.addEventListener("load", () => {
+        // Small delay to ensure GSAP is ready
+        setTimeout(() => {
+          if (window.gsap && window.ScrollTrigger) {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero parallax effect
+            // hero-01 moves slowest (0.3x speed)
+            gsap.to("#hero-01", {
+              yPercent: -10,
+              ease: "none",
+              scrollTrigger: {
+                trigger: ".hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true,
+              },
+            });
+
+            // hero-02 moves medium speed (0.5x speed)
+            gsap.to("#hero-02", {
+              yPercent: -15,
+              ease: "none",
+              scrollTrigger: {
+                trigger: ".hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true,
+              },
+            });
+
+            // hero-03 moves fastest (0.7x speed)
+            gsap.to("#hero-03", {
+              yPercent: -25,
+              ease: "none",
+              scrollTrigger: {
+                trigger: ".hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true,
+              },
+            });
+
+            // Pin the description text for 200vh
+            ScrollTrigger.create({
+              trigger: ".description-container",
+              start: "top top",
+              end: "bottom 100%",
+              pin: ".description-pin-container",
+              pinSpacing: false,
+            });
+
+            // Split text into words and animate
+            function splitTextIntoWords(element) {
+              const text = element.textContent.trim();
+              const words = text.split(/\s+/).filter((word) => word.length > 0);
+              element.innerHTML = words
+                .map((word) => `<span class="split-word">${word}</span>`)
+                .join(" ");
+              return element.querySelectorAll(".split-word");
+            }
+
+            // Apply text splitting to description text
+            const descriptionText = document.querySelector(".description-text");
+            const words = splitTextIntoWords(descriptionText);
+
+            // Animate words opacity based on scroll
+            gsap.timeline({
+              scrollTrigger: {
+                trigger: ".description-container",
+                start: "top top",
+                end: "bottom 120%",
+                scrub: 1,
+                onUpdate: (self) => {
+                  const progress = self.progress;
+                  const totalWords = words.length;
+                  const wordsToShow = Math.floor(progress * totalWords);
+
+                  words.forEach((word, index) => {
+                    if (index <= wordsToShow) {
+                      gsap.to(word, { opacity: 1, duration: 0 });
+                    } else {
+                      gsap.to(word, { opacity: 0.2, duration: 0 });
+                    }
+                  });
+                },
+              },
+            });
+          }
+        }, 100);
+      });
+    </script>
+
+    <!-- Load the components -->
+    <script src="scroll-gallery.js" type="module"></script>
+    <script src="text-scroll-ride.js" type="module"></script>
+  </body>
+</html>
